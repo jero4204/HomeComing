@@ -1,6 +1,7 @@
 
 
 export interface Casa {
+    id: number;
     nombre: string;
     precio: number;
     wifi: boolean;
