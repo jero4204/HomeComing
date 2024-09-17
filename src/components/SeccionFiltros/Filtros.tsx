@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Option } from "../../models/Option";
+import { useNavigate } from "react-router-dom";
 
 export const Filtros = () => {
     const [sliderValue, setSliderValue] = useState<number>(0);
@@ -26,7 +27,7 @@ export const Filtros = () => {
         );
     };
 
-    const [selectedOption, setSelectedOption] = useState<string>('1 Habitación');
+    const [selectedOption, setSelectedOption] = useState<string>('1Habitación');
 
     // Maneja el cambio de selección
     const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -38,6 +39,14 @@ export const Filtros = () => {
     // Maneja el cambio de selección
     const handleSelectTransporteChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedTransporte(event.target.value);
+    };
+
+    const navigate = useNavigate();
+
+    const goToRespuesta = () => {
+        
+        // Redirigir a la ruta con los parámetros en la URL
+        navigate(`/respuestafiltros/${sliderValue.toString()}/${String(options[0].checked)}/${String(options[1].checked)}/${String(options[2].checked)}/${String(options[3].checked)}/${String(options[4].checked)}/${String(options[5].checked)}/${selectedOption}/${selectedTransporte}`);
     };
 
     return (
@@ -85,9 +94,9 @@ export const Filtros = () => {
                     value={selectedOption}
                     onChange={handleSelectChange}
                     className="px-4 py-2 bg-white border border-gray-300 rounded-lg">
-                    <option value="1 Habitación">1 habitación</option>
-                    <option value="2-3 Habitaciones">2-3 habitaciones</option>
-                    <option value="+3 Habitaciones">+3 habitaciones</option>
+                    <option value="1Habitación">1 habitación</option>
+                    <option value="2-3Habitaciones">2-3 habitaciones</option>
+                    <option value="+3Habitaciones">+3 habitaciones</option>
                 </select>
             </div>
             <h2 className="md:text-3xl text-xl text-left">Filtrar por transporte</h2>
@@ -96,7 +105,7 @@ export const Filtros = () => {
                     Selección actual: {selectedTransporte}
                 </label>
                 <select
-                    id="selector"
+                    id="selectorTransporte"
                     value={selectedTransporte}
                     onChange={handleSelectTransporteChange}
                     className="px-4 py-2 bg-white border border-gray-300 rounded-lg">
@@ -105,6 +114,10 @@ export const Filtros = () => {
                     <option value="UPB">UPB</option>
                 </select>
             </div>
+            <button
+                onClick={goToRespuesta}
+                className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
+            </button>
         </div>
     )
 }
