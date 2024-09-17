@@ -20,7 +20,6 @@ export const RespuestaFiltros = () =>{
     const [casasComparar] = useState<Casa[]>(casasData);
     const [casasRespuesta, setCasasRespuesta] = useState<Casa[]>([]);
     let habitaciones = 0;
-    let hab=[];
     useEffect(()=>{
         
         if(disposicion == "+3Habitaciones"){
